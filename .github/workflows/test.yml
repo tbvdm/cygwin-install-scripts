@@ -1,0 +1,28 @@
+name: test
+
+on:
+  push:
+  schedule:
+    - cron: '12 3 * * 4'
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        script:
+          - install-cygwin-sigbak.ps1
+          - install-cygwin-sigtop.ps1
+
+    runs-on: windows-latest
+
+    steps:
+      - name: download
+        run: |
+          Invoke-WebRequest -OutFile ${{matrix.script}} `
+            https://www.kariliq.nl/sigbak/${{matrix.script}}
+
+      - name: run
+        run: |
+          '' | .\${{matrix.script}}
