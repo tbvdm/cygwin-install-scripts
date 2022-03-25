@@ -63,7 +63,7 @@ if (Test-Path "$setup") {
 }
 
 Say "Installing Cygwin"
-$process = Start-Process -PassThru -Wait ".\$setup" `
+$process = Start-Process -NoNewWindow -PassThru -Wait ".\$setup" `
     "--local-package-dir `"$packageDirectory`"",
     "--packages `"$($packages -join ',')`"",
     "--quiet-mode",
