@@ -75,15 +75,13 @@ if ($process.ExitCode -ne 0) {
 }
 
 Say "Installing sigtop"
-$process = Start-Process -NoNewWindow -PassThru -Wait "$rootDirectory\bin\bash.exe" `
-    "-celo igncr",
-    '"
-    cd
-    rm -fr sigtop
-    git clone -b portable https://github.com/tbvdm/sigtop.git
-    make -C sigtop install clean
-    "'
-if ($process.ExitCode -ne 0) {
+@'
+cd
+rm -fr sigtop
+git clone -b portable https://github.com/tbvdm/sigtop.git
+make -C sigtop install clean
+'@ | & $rootDirectory\bin\bash.exe -elo igncr
+if (-not $?) {
     Abort "The installation of sigtop failed"
 }
 

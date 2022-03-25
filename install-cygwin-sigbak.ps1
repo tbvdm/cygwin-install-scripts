@@ -79,23 +79,21 @@ if ($process.ExitCode -ne 0) {
 }
 
 Say "Installing protobuf-c and sigbak"
-$process = Start-Process -NoNewWindow -PassThru -Wait "$rootDirectory\bin\bash.exe" `
-    "-celo igncr",
-    '"
-    cd
-    VERSION=1.3.3
-    curl -LO https://github.com/protobuf-c/protobuf-c/releases/download/v$VERSION/protobuf-c-$VERSION.tar.gz
-    rm -fr protobuf-c-$VERSION
-    tar fxz protobuf-c-$VERSION.tar.gz
-    cd protobuf-c-$VERSION
-    ./configure --prefix=/usr/local
-    make install
-    cd ..
-    rm -fr protobuf-c-$VERSION sigbak
-    git clone -b portable https://github.com/tbvdm/sigbak.git
-    PKG_CONFIG_PATH=/usr/local/lib/pkgconfig make -C sigbak install clean
-    "'
-if ($process.ExitCode -ne 0) {
+@'
+cd
+VERSION=1.3.3
+curl -LO https://github.com/protobuf-c/protobuf-c/releases/download/v$VERSION/protobuf-c-$VERSION.tar.gz
+rm -fr protobuf-c-$VERSION
+tar fxz protobuf-c-$VERSION.tar.gz
+cd protobuf-c-$VERSION
+./configure --prefix=/usr/local
+make install
+cd ..
+rm -fr protobuf-c-$VERSION sigbak
+git clone -b portable https://github.com/tbvdm/sigbak.git
+PKG_CONFIG_PATH=/usr/local/lib/pkgconfig make -C sigbak install clean
+'@ | & $rootDirectory\bin\bash.exe -elo igncr
+if (-not $?) {
     Abort "The installation of protobuf-c or sigbak failed"
 }
 
