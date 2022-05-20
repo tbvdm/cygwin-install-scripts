@@ -21,7 +21,7 @@ jobs:
       - name: download
         run: |
           Invoke-WebRequest -OutFile ${{matrix.script}} `
-            https://www.kariliq.nl/sigbak/${{matrix.script}}
+            https://github.com/tbvdm/cygwin-install-scripts/raw/master/${{matrix.script}}
 
       - name: run
         run: |
