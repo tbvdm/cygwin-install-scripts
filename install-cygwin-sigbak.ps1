@@ -81,12 +81,12 @@ if ($process.ExitCode -ne 0) {
 Say "Installing protobuf-c and sigbak"
 @'
 cd
-VERSION=1.3.3
+VERSION=1.4.1
 curl -LO https://github.com/protobuf-c/protobuf-c/releases/download/v$VERSION/protobuf-c-$VERSION.tar.gz
 rm -fr protobuf-c-$VERSION
 tar fxz protobuf-c-$VERSION.tar.gz
 cd protobuf-c-$VERSION
-./configure --prefix=/usr/local
+./configure
 make install
 cd ..
 rm -fr protobuf-c-$VERSION sigbak
