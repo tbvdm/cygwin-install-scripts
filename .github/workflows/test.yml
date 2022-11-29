@@ -2,8 +2,6 @@ name: test
 
 on:
   push:
-  schedule:
-    - cron: '12 3 * * 4'
   workflow_dispatch:
 
 jobs:
