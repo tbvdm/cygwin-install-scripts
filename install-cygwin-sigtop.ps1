@@ -12,6 +12,9 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+# This script is obsolete. See https://github.com/tbvdm/sigtop for current
+# instructions on how to install sigtop on Windows.
+
 $setup            = "setup-x86_64.exe"
 $setupUrl         = "https://cygwin.com/$setup"
 $setupDirectory   = "C:\cygwin-setup"
@@ -78,7 +81,7 @@ Say "Installing sigtop"
 @'
 cd
 rm -fr sigtop
-git clone -b portable https://github.com/tbvdm/sigtop.git
+git clone -b old/portable https://github.com/tbvdm/sigtop.git
 make -C sigtop install clean
 '@ | & $rootDirectory\bin\bash.exe -elo igncr
 if (-not $?) {
